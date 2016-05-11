@@ -114,6 +114,6 @@ public class Weapon : MonoBehaviour {
         Destroy(clone.gameObject, 0.02f);
 
         //shake camera
-        camShake.Shake(camShakeAmt, camShakeLength);
+        //camShake.Shake(camShakeAmt, camShakeLength);
     }
 }

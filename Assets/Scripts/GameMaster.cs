@@ -1,17 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
-[RequireComponent(typeof(AudioSource))]
-public class GameMaster : MonoBehaviour {
+public class GameMaster : MonoBehaviour
+{
 
     public static GameMaster gm;
-    public Transform playerPrefab;
-    public Transform spawnPoint;
-    public int spawnDelay = 2;
-    public Transform spawnPrefab;
-
-    public CameraShake cameraShake;
-
 
     void Awake()
     {
@@ -21,26 +15,35 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
+    public Transform playerPrefab;
+    public Transform spawnPoint;
+    public float spawnDelay = 2;
+    public Transform spawnPrefab;
+
+    public CameraShake cameraShake;
+
     void Start()
     {
         if (cameraShake == null)
         {
-            Debug.LogError("No camera shake referenced in game master");
+            Debug.LogError("No camera shake referenced in GameMaster");
         }
     }
 
-    public IEnumerator RespawnPlayer()
+    public IEnumerator _RespawnPlayer()
     {
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
-        Transform spawnParticles = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation) as Transform;
+
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-        Destroy(spawnParticles.gameObject,3);
+        GameObject clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
+        Destroy(clone, 3f);
     }
+
     public static void KillPlayer(Player player)
     {
         Destroy(player.gameObject);
-        gm.StartCoroutine(gm.RespawnPlayer());
+        gm.StartCoroutine(gm._RespawnPlayer());
     }
 
     public static void KillEnemy(Enemy enemy)
@@ -50,8 +53,9 @@ public class GameMaster : MonoBehaviour {
     public void _KillEnemy(Enemy _enemy)
     {
         GameObject _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity) as GameObject;
-        Destroy(_clone, 3f);
-        cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
+        Destroy(_clone, 5f);
+        cameraShake.Shake(_enemy.shakeAmt, _enemy.shakeLength);
         Destroy(_enemy.gameObject);
     }
+
 }

@@ -1,35 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
     [System.Serializable]
     public class EnemyStats
     {
-        private int _currentHealth;        
-
         public int maxHealth = 100;
-        public int currentHealth
+
+        private int _curHealth;
+        public int curHealth
         {
-            get { return _currentHealth; }
-            set
-            {
-                _currentHealth = Mathf.Clamp(value, 0, maxHealth);
-            }
+            get { return _curHealth; }
+            set { _curHealth = Mathf.Clamp(value, 0, maxHealth); }
         }
 
         public int damage = 40;
 
         public void Init()
         {
-            currentHealth = maxHealth;
+            curHealth = maxHealth;
         }
     }
 
     public EnemyStats stats = new EnemyStats();
+
     public Transform deathParticles;
 
-    public float shakeAmount = 0.1f;
+    public float shakeAmt = 0.1f;
     public float shakeLength = 0.1f;
 
     [Header("Optional: ")]
@@ -42,36 +41,36 @@ public class Enemy : MonoBehaviour {
 
         if (statusIndicator != null)
         {
-            statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+            statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
         }
+
         if (deathParticles == null)
         {
-            Debug.LogError("No Dp referenced on enemy");
+            Debug.LogError("No death particles referenced on Enemy");
         }
     }
 
     public void DamageEnemy(int damage)
     {
-        stats.currentHealth -= damage;
-        if (stats.currentHealth <= 0)
+        stats.curHealth -= damage;
+        if (stats.curHealth <= 0)
         {
             GameMaster.KillEnemy(this);
         }
 
         if (statusIndicator != null)
         {
-            statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+            statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D colliderInfo)
+    void OnCollisionEnter2D(Collision2D _colInfo)
     {
-        Player player = colliderInfo.collider.GetComponent<Player>();
-        if (player != null)
+        Player _player = _colInfo.collider.GetComponent<Player>();
+        if (_player != null)
         {
-            player.DamagePlayer(stats.damage);
-            DamageEnemy(99999);
+            _player.DamagePlayer(stats.damage);
+            DamageEnemy(9999999);
         }
-
     }
 }

@@ -35,6 +35,7 @@ namespace UnityStandardAssets._2D
                 FindPlayer();
                 return;
             }
+
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
 
@@ -63,10 +64,15 @@ namespace UnityStandardAssets._2D
         {
             if (nextTimeToSearch <= Time.time)
             {
-                GameObject searchResult = GameObject.FindGameObjectWithTag("Player");
-                if (searchResult != null)
+                GameObject[] searchResults; 
+                searchResults = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject searchResult in searchResults)
                 {
-                    target = searchResult.transform;
+                    if (searchResult != null && searchResult.GetComponent<Player>() != null)
+                    {
+                        Debug.Log("Camera found player!");
+                        target = searchResult.transform;
+                    }
                 }
                 nextTimeToSearch = Time.time + 0.5f;
             }

@@ -40,15 +40,15 @@ public class Parallaxing : MonoBehaviour
 	        //the paralax is the opposite of the camera movement because the previous frame multiplied by the scale
 	        float parallaxX = (previousCamPosition.x - cam.position.x)*parallaxScales[i];
 
-            float parallaxY = (previousCamPosition.y - cam.position.y) * parallaxScales[i];
+            //float parallaxY = (previousCamPosition.y - cam.position.y) * parallaxScales[i];
 
             //set a target x position which is the current position + the parallax
             float backgroundTargetPositionX = backgrounds[i].position.x + parallaxX;
 
-            float backgroundTargetPositionY = backgrounds[i].position.y + parallaxY;
+            //float backgroundTargetPositionY = backgrounds[i].position.y + parallaxY;
 
             //create a target position for the background
-            Vector3 backgroundTargetPosition = new Vector3(backgroundTargetPositionX, backgroundTargetPositionY,
+            Vector3 backgroundTargetPosition = new Vector3(backgroundTargetPositionX, backgrounds[i].position.y,
 	            backgrounds[i].position.z);
 
             //fade between current position and the target position using lerp
