@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 11426310}
   - 82: {fileID: 8217762}
   - 114: {fileID: 11447404}
+  - 114: {fileID: 11487514}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GameMaster
@@ -160,11 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfe1e9e2ba565544914b9fe66b24f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingLives: 3
   playerPrefab: {fileID: 430092, guid: a7dadf3ad7f911340a816a01be0dd2a6, type: 2}
   spawnPoint: {fileID: 423360}
   spawnDelay: 2
   spawnPrefab: {fileID: 460144, guid: d79af7495dcb2e64ea4dd2ff334f6e73, type: 2}
   cameraShake: {fileID: 11447404}
+  gameOverUI: {fileID: 0}
 --- !u!114 &11447404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +180,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 0}
+--- !u!114 &11487514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcd8a9744be2644ca1aea96f97d4c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - name: Alien Invasion
+    enemy: {fileID: 464076, guid: b95911fa80779804493ada79dd1765ab, type: 2}
+    count: 3
+    rate: 1
+  - name: Alien Invasion 2.0
+    enemy: {fileID: 464076, guid: b95911fa80779804493ada79dd1765ab, type: 2}
+    count: 4
+    rate: 1.5
+  - name: Run While You Can!
+    enemy: {fileID: 464076, guid: b95911fa80779804493ada79dd1765ab, type: 2}
+    count: 7
+    rate: 2
+  - name: Final Boss
+    enemy: {fileID: 464076, guid: 59f3ca582f2a12644a614979bc3632ff, type: 2}
+    count: 1
+    rate: 2
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  timeBetweenWaves: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

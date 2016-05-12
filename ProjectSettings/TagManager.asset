@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameMaster
   - Fire
+  - Enemy
   layers:
   - Default
   - TransparentFX

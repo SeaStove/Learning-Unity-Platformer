@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 using Pathfinding;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -56,6 +57,9 @@ public class EnemyAI : MonoBehaviour {
     IEnumerator SearchForPlayer()
     {
         GameObject sResult = GameObject.FindGameObjectWithTag("Player");
+        Selection.activeObject = sResult;
+
+        Debug.Log(sResult);
         if (sResult == null)
         {
             yield return new WaitForSeconds(0.5f);
@@ -90,7 +94,7 @@ public class EnemyAI : MonoBehaviour {
 
     public void OnPathComplete(Path p)
     {
-        Debug.Log("We got a path. Erorr?" + p.error);
+        Debug.Log("We got a path. Erorr? " + p.error);
         if (!p.error)
         {
             path = p;

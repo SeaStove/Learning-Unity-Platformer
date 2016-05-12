@@ -368,9 +368,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92bf3505f4fd3c428afeedd37561703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats:
+  stats:
     maxHealth: 100
-  fallBoundry: -20
+  fallBoundary: -20
   statusIndicator: {fileID: 11401904}
 --- !u!114 &11442802
 MonoBehaviour:
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0
-  Damage: 10
+  Damage: 40
   whatToHit:
     serializedVersion: 2
     m_Bits: 4294967035
